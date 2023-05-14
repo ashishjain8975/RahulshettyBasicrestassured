@@ -15,24 +15,20 @@ public class StaticJson {
     @Test
 
     public void addBook() throws IOException
-
-
-
     {
-
-
-
         RestAssured.baseURI="https://rahulshettyacademy.com";
 
-        String resp=given().
+        String resp=
 
-                header("Content-Type","application/json").
+                given().
+                        header("Content-Type","application/json").
 
-                body(GenerateStringFromResource("C:\\Users\\HP\\IdeaProjects\\Restassuredproject1rahul\\src\\test\\java\\Files\\Bookdata.json")).
-                log().all().
+                        body(GenerateStringFromResource("C:\\Users\\HP\\IdeaProjects\\Restassuredproject1rahul\\src\\test\\java\\Files\\Bookdata.json")).
+
+                        log().all().
                 when().
 
-                post("/Library/Addbook.php").
+                        post("/Library/Addbook.php").
 
                 then().assertThat().statusCode(200).
 

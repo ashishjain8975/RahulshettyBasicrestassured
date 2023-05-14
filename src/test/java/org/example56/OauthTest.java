@@ -23,7 +23,8 @@ public class OauthTest {
 
     public static void main(String[] args) {
 
-        String[] coursetitle={"Selenium Webdriver Java","Cypress","Protractor"};
+
+        //Perform below steps manually
      /* //  WebDriverManager.chromedriver().setup();
         WebDriver driver=new ChromeDriver();
         driver.get("https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&auth_url=https://accounts.google.com/o/oauth2/v2/auth&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&response_type=code&redirect_uri=https://rahulshettyacademy.com/getCourse.php");
@@ -32,10 +33,12 @@ public class OauthTest {
 
        String url=driver.getCurrentUrl();*/
         //As google has restricted gmail access through automation,add this url as below manually by following above steps manually
-        String url="https://rahulshettyacademy.com/getCourse.php?code=4%2F0AdQt8qihnRbkFKCu9OgZxj-qqEuFVK2eGvpvSY_tF5ucnpJTIPKOlH0zlp9bcuN0zd4SLA&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=1&prompt=none";
+        String url="https://rahulshettyacademy.com/getCourse.php?code=4%2F0AfgeXvs4LzHbrQt0Ro1Ebe60o_TiYRRdBpiKNJstqBihl497j8PPbJnOseFwSBPg1uGo0Q&scope=email+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=none";
        String partialcode=url.split("code=")[1];
        String code=partialcode.split("&scope")[0];
 
+
+       //To get access_token
         String accesstokenresponse=
         given().
                 urlEncodingEnabled(false).
@@ -71,12 +74,13 @@ public class OauthTest {
         System.out.println(response2);
 
         //from pojo classes
+        //we get object oj Java classes
         GetCourses gc=given().
                                 queryParam("access_token",accesstoken).
-                                expect().defaultParser(Parser.JSON).
+                                expect().defaultParser(Parser.JSON).     //as we are expecting json response and not java object.If response header is application type Json this line can be avoided
                     when().
                             get("https://rahulshettyacademy.com/getCourse.php").
-                            as(GetCourses.class);
+                            as(GetCourses.class);//Earlier we used asString.For pojo use as class
 
         System.out.println(gc.getLinkedIn());
         System.out.println(gc.getInstructor());
@@ -92,7 +96,7 @@ public class OauthTest {
                 System.out.println(apicourse.get(i).getPrice());
             }
         }
-
+        String[] coursetitle={"Selenium Webdriver Java","Cypress","Protractor"};
         List<WebAutomation> coursesfrom=gc.getCourses().getWebAutomation();
         ArrayList<String> actuallist=new ArrayList<String>();
 

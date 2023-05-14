@@ -22,6 +22,7 @@ public class SpecBuilder2 {
     {
 
         baseURI="https://rahulshettyacademy.com";
+        //Serialiazation
         AddPlace p=new AddPlace();
         p.setAccuracy(50);
         p.setAddress("28,side layout,cohan 90");
@@ -54,6 +55,7 @@ public class SpecBuilder2 {
 
 
        Response res= given().
+                            log().all().
                    // queryParam("key","qaclick123").
                            spec(req).
                 body(p).

@@ -41,9 +41,9 @@ public class SerializeTest {
 
 
        Response res= given().
-                queryParam("key","qaclick123").
-                body(p).
-                log().all().
+                            queryParam("key","qaclick123").
+                            body(p).
+                            log().all().
 
                 when().
                         post("/maps/api/place/add/json").
